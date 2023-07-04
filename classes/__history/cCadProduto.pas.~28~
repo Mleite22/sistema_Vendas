@@ -1,0 +1,217 @@
+﻿unit cCadProduto;
+
+interface
+
+uses  System.Classes,
+      Vcl.Controls,
+      Vcl.ExtCtrls,
+      Vcl.Dialogs,
+      ZAbstractConnection,
+      ZConnection,
+      ZAbstractRODataset,
+      ZAbstractDataset,
+      ZDataset,
+      System.SysUtils;
+
+type
+  TProduto = class
+
+  private
+      ConexaoDB : TZConnection;
+      F_produto_id : Integer; //int
+      F_nome : String ; //Varchar
+      F_descricao : string;
+      F_valor : Double;
+      F_quantidade : Double;
+      F_categoria_id : Integer;
+
+
+  public
+      constructor Create(aConexao : TZConnection);
+      destructor Destroy; override;
+      function Atualizar : Boolean;
+      function Apagar : Boolean;
+      function Gravar: Boolean;
+      function Selecionar (id:Integer): Boolean;
+
+  published
+      property codigo           :Integer    read F_produto_id       write F_produto_id;
+      property nome             :string     read F_nome             write F_nome;
+      property descricao        :string     read F_descricao        write F_descricao;
+      property valor            :Double     read F_valor            write F_valor;
+      property quantidade       :Double     read F_quantidade       write F_quantidade;
+      property categoria_id     :Integer    read F_categoria_id     write F_categoria_id;
+
+
+  end;
+
+implementation
+
+{$Region 'Constructor and Destructor'}
+
+constructor TProduto.Create(aConexao:TZConnection);
+
+begin
+  ConexaoDB := aConexao;
+end;
+
+destructor TProduto.Destroy;
+begin
+  inherited;
+end;
+
+{$endRegion}
+
+                {$Region 'CRUD'}
+
+                  //APAGAR
+function TProduto.Apagar:Boolean;
+   var QRYApagar : TZQuery;
+begin
+  if MessageDlg('Apagar o Registro: '+#13+#13+
+                'Códido: '+IntToStr(F_produto_id)+#13+
+                'Descrição: '+F_nome,mtInformation,[mbYes, mbNo],0)=mrNo then
+  begin
+    Result := False;
+    Abort;
+  end;
+
+  try
+
+    Result:= True;
+    QRYApagar:= TZQuery.Create(nil);
+    QRYApagar.Connection:= ConexaoDB;
+    QRYApagar.SQL.Clear;
+    QRYApagar.SQL.Add('DELETE FROM produtos '+
+                      ' WHERE produto_id = :produto_id ');
+
+    QRYApagar.ParamByName('produto_id').AsInteger := F_produto_id;
+
+    try
+      QRYApagar.ExecSQL;
+    Except
+      Result := false;
+    end;
+
+  finally
+    if Assigned(QRYApagar) then
+      FreeAndNil(QRYApagar);
+  end;
+
+end;
+            //ATUALIZAR
+function TProduto.Atualizar: Boolean;
+  var QRYAtualizar : TZQuery;
+begin
+  try
+    Result := true;
+    QRYAtualizar := TZQuery.Create(nil);
+    QRYAtualizar.Connection := ConexaoDB;
+    QRYAtualizar.SQL.Clear;
+    QRYAtualizar.SQL.Add('UPDATE produtos '+
+                         ' SET nome         =:nome '+
+                         '    ,descricao    =:descricao '+
+                         '    ,valor        =:valor '+
+                         '    ,quantidade   =:quantidade '+
+                         '    ,categoria_id =:categoria_id '+
+                         'WHERE produto_id  =:produto_id ');
+
+    QRYAtualizar.ParamByName('produto_id').AsInteger      :=Self.F_produto_id;
+    QRYAtualizar.ParamByName('nome').AsString             :=Self.F_nome;
+    QRYAtualizar.ParamByName('descricao').AsString        :=Self.F_descricao;
+    QRYAtualizar.ParamByName('valor').AsFloat             :=Self.F_valor;
+    QRYAtualizar.ParamByName('quantidade').AsFloat        :=Self.F_quantidade;
+    QRYAtualizar.ParamByName('categoria_id').AsInteger    :=Self.F_categoria_id;
+
+    try
+      QRYAtualizar.ExecSQL;
+
+    Except
+      Result := false;
+    end;
+
+  finally
+    if Assigned(QRYAtualizar) then
+      FreeAndNil(QRYAtualizar);
+  end;
+end;
+
+                //GRAVAR
+function TProduto.Gravar: Boolean;
+  var QRYGravar : TZQuery;
+begin
+  try
+    Result:= true;
+    QRYGravar:= TZQuery.Create(nil);
+    QRYGravar.Connection:= ConexaoDB;
+    QRYGravar.SQL.Clear;
+    QRYGravar.SQL.Add('INSERT INTO produtos (nome, '+
+                      '                      descricao, '+
+                      '                      valor, '+
+                      '                      quantidade, '+
+                      '                      categoria_id) '+
+                      'VALUES               (:nome, '+
+                      '                      :descricao '+
+                      '                      :valor '+
+                      '                      :quantidade, '+
+                      '                      :categoria_id) ');
+
+    QRYGravar.ParamByName('nome').AsString          :=Self.F_nome;
+    QRYGravar.ParamByName('descricao').AsString     :=Self.F_descricao;
+    QRYGravar.ParamByName('valor').AsFloat          :=Self.F_valor;
+    QRYGravar.ParamByName('quantidade').AsFloat     :=Self.F_quantidade;
+    QRYGravar.ParamByName('categoria_id').AsInteger :=Self.F_categoria_id;
+
+    try
+      QRYGravar.ExecSQL;
+    Except
+      Result:= false;
+    end;
+  finally
+    if Assigned (QRYGravar) then
+        FreeAndNil(QRYGravar);
+  end;
+end;
+
+                  //SELECIONAR
+function TProduto.Selecionar(id: Integer): Boolean;
+  var QRYSelecionar : TZQuery;
+begin
+  try
+    Result:= true;
+    QRYSelecionar:=TZQuery.Create(nil);
+    QRYSelecionar.Connection:= ConexaoDB;
+    QRYSelecionar.SQL.Clear;
+    QRYSelecionar.SQL.Add(' SELECT produto_id, '+
+                          '       nome, '+
+                          '       descricao, '+
+                          '       valor, '+
+                          '       quantidade, '+
+                          '       categoria_id '+
+                          ' FROM produtos '+
+                          ' WHERE produto_id = :produto_id ');
+
+    QRYSelecionar.ParamByName('produto_id').AsInteger := id;
+
+    try
+      QRYSelecionar.Open;
+
+      Self.F_produto_id       := QRYSelecionar.FieldByName('produto_id').AsInteger;
+      Self.F_nome             := QRYSelecionar.FieldByName('nome').AsString;
+      Self.F_descricao        := QRYSelecionar.FieldByName('descricao').AsString;
+      Self.F_valor            := QRYSelecionar.FieldByName('valor').AsFloat;
+      Self.F_quantidade       := QRYSelecionar.FieldByName('quantidade').AsFloat;
+      Self.F_categoria_id     := QRYSelecionar.FieldByName('categoria_id').AsInteger;
+    Except
+      REsult:= false;
+    end;
+  finally
+    if Assigned(QRYSelecionar) then
+      FreeAndNil(QRYSelecionar);
+  end;
+
+end;
+
+{$endRegion}
+
+end.

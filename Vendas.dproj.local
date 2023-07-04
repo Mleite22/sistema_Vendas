@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2023/05/23 15:11:16.000.704,=C:\Users\mlopes\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/05/23 15:13:55.000.319,=C:\Users\mlopes\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/05/23 15:14:55.000.708,=C:\Users\mlopes\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/06/05 09:28:07.000.247,=C:\Users\mlopes\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/06/05 09:29:08.000.077,C:\Users\mlopes\Documents\Embarcadero\Studio\Projects\Unit1.dfm=G:\Meu Drive\T.I\Sist_Delphi\uPrincipal.dfm</Transaction>
+    <Transaction>2023/06/05 09:29:08.000.077,C:\Users\mlopes\Documents\Embarcadero\Studio\Projects\Unit1.pas=G:\Meu Drive\T.I\Sist_Delphi\uPrincipal.pas</Transaction>
+    <Transaction>2023/06/05 09:29:35.000.829,C:\Users\mlopes\Documents\Embarcadero\Studio\Projects\Project1.dproj=G:\Meu Drive\T.I\Sist_Delphi\Vendas.dproj</Transaction>
+    <Transaction>2023/06/05 09:39:57.000.105,=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/05 09:42:05.000.496,G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas=G:\Meu Drive\T.I\Sist_Delphi\DataModule\uDTMConexao.pas</Transaction>
+    <Transaction>2023/06/05 09:42:05.000.496,G:\Meu Drive\T.I\Sist_Delphi\Unit1.dfm=G:\Meu Drive\T.I\Sist_Delphi\DataModule\uDTMConexao.dfm</Transaction>
+    <Transaction>2023/06/05 10:24:16.000.384,=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/05 10:24:46.000.754,G:\Meu Drive\T.I\Sist_Delphi\heranca\uTelaHeranca.dfm=G:\Meu Drive\T.I\Sist_Delphi\Unit1.dfm</Transaction>
+    <Transaction>2023/06/05 10:24:46.000.754,G:\Meu Drive\T.I\Sist_Delphi\heranca\uTelaHeranca.pas=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/05 12:38:25.000.603,=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/05 12:39:20.000.622,G:\Meu Drive\T.I\Sist_Delphi\cadastro\uCadcategoria.dfm=G:\Meu Drive\T.I\Sist_Delphi\Unit1.dfm</Transaction>
+    <Transaction>2023/06/05 12:39:20.000.622,G:\Meu Drive\T.I\Sist_Delphi\cadastro\uCadcategoria.pas=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/05 12:54:46.000.489,=G:\Meu Drive\T.I\Sist_Delphi\terceiros\Enter.pas</Transaction>
+    <Transaction>2023/06/05 14:42:31.000.008,=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/05 14:43:03.000.333,G:\Meu Drive\T.I\Sist_Delphi\heranca\uEnum.pas=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/07 13:49:48.000.016,=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/07 13:50:34.000.176,G:\Meu Drive\T.I\Sist_Delphi\classes\cCadCategoria.pas=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/16 08:44:53.000.237,=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/16 08:47:36.000.447,G:\Meu Drive\T.I\Sist_Delphi\cadastro\uCadCliente.pas=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/16 08:47:36.000.448,G:\Meu Drive\T.I\Sist_Delphi\cadastro\uCadCliente.dfm=G:\Meu Drive\T.I\Sist_Delphi\Unit1.dfm</Transaction>
+    <Transaction>2023/06/19 10:28:29.000.442,=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/19 10:29:17.000.109,G:\Meu Drive\T.I\Sist_Delphi\classes\cCadCliente.pas=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/23 14:34:41.000.328,=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/23 14:35:18.000.969,G:\Meu Drive\T.I\Sist_Delphi\cadastro\uCadProduto.pas=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/23 14:35:18.000.969,G:\Meu Drive\T.I\Sist_Delphi\cadastro\uCadProduto.dfm=G:\Meu Drive\T.I\Sist_Delphi\Unit1.dfm</Transaction>
+    <Transaction>2023/06/27 14:05:48.000.113,=G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas</Transaction>
+    <Transaction>2023/06/27 14:06:26.000.409,G:\Meu Drive\T.I\Sist_Delphi\Unit1.pas=G:\Meu Drive\T.I\Sist_Delphi\classes\cCadProduto.pas</Transaction>
+  </Transactions>
+</BorlandProject>

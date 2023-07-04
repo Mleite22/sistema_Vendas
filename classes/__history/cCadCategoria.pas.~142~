@@ -1,0 +1,170 @@
+﻿unit cCadCategoria;
+
+interface
+
+uses System.Classes,
+     Vcl.Controls,
+     Vcl.ExtCtrls,
+     Vcl.Dialogs, //lista da Units
+     ZAbstractConnection,  //CONEXÃO DB
+     ZConnection,          //CONEXÃO DB
+     ZAbstractRODataset,
+     ZAbstractDataset,
+     ZDataset,
+     System.SysUtils;
+
+type
+  TCategoria = class
+
+    private
+      ConexaoDB : TZConnection;
+      F_categoria_id : Integer;  //int
+      F_descricao : String;     //varchar
+
+    function getCodigo: Integer;
+    function getDescricao: String;
+    procedure setCodigo(const Value: Integer);
+    procedure setDescricao(const Value: String);
+
+    public  //Variaveis publicas
+
+      constructor Create (aConexao: TZConnection);  //CONEXÃO DB
+
+      destructor Destroy; override;
+
+      function Gravar: Boolean;
+
+      function Atualizar: Boolean;
+
+      function Apagar: Boolean;
+
+      function Selecionar (id:Integer): Boolean;
+
+    published //Variaveis e métodos publicos que podem ser usadas fora da classe
+
+      property codigo : Integer read getCodigo    write setCodigo;
+      property descricao    : String  read getDescricao write setDescricao;
+  end;
+
+implementation //Corpo da classe
+
+
+
+{ TCategoria }
+                {$region'GRUD'}
+
+                  //Apagar
+function TCategoria.Apagar: Boolean;
+begin
+   ShowMessage('Apagado');
+   Result:= True;
+end;
+
+                   //Atualizar
+function TCategoria.Atualizar: Boolean;
+begin
+   ShowMessage('Atualizado');
+   Result:= True;
+end;
+
+                  //Gravar
+function TCategoria.Gravar: Boolean;
+
+var QRYGravar : TZQuery;  //Inseri dados na tabela
+
+begin
+   try
+     Result :=True;
+     QRYGravar:= TZQuery.Create(nil);
+     QRYGravar.Connection:= ConexaoDB;
+     QRYGravar.SQL.Clear;
+     QRYGravar.SQL.Add('INSERT into Categorias (descricao) VALUES (:descricao)');
+     QRYGravar.ParamByName('descricao').AsString:= Self.F_descricao;
+     try
+       QRYGravar.ExecSQL; //Execulta no banco de dados
+     Except
+     Result := False;
+
+     end;
+   finally
+   if Assigned(QRYGravar) then  //Exclui da memória
+     FreeAndNil(QRYGravar);
+
+
+   end;
+end;
+
+                 //Selecionar
+function TCategoria.Selecionar(id: Integer): Boolean;
+var QRYAlterar : TZQuery;  //Inseri dados na tabela
+begin
+   try
+     Result :=True;
+     QRYAlterar:= TZQuery.Create(nil);
+     QRYAlterar.Connection := ConexaoDB;
+     QRYAlterar.SQL.Clear;
+     QRYAlterar.SQL.Add('Select categoria_id, ' +
+                              ' descricao ' +
+                       ' from Categorias ' +
+                       ' where categoria_id = :categoria_id ');
+     QRYAlterar.ParamByName('categoria_id').AsInteger:= id;
+     try
+       QRYAlterar.Open;
+
+       Self.F_categoria_id := QRYAlterar.FieldByName('categoria_id').AsInteger;
+       Self.F_descricao := QRYAlterar.FieldByName('descricao').AsString;
+     Except
+     Result := False;
+     end;
+
+   finally
+   if Assigned(QRYAlterar) then
+     FreeAndNil(QRYAlterar);
+
+
+  end;
+end;
+
+              {$endregion}
+
+                 {$region'CONSTRUCTION, DESTRUCTION'}
+
+constructor TCategoria.Create(aConexao: TZConnection);
+begin
+  ConexaoDB := aConexao;
+end;
+
+destructor TCategoria.Destroy;
+begin
+
+  inherited;
+end;
+              {$endregion}
+
+              {$region'GET'}
+function TCategoria.getCodigo: Integer;
+begin
+   Result := Self.F_categoria_id;
+end;
+
+function TCategoria.getDescricao: String;
+begin
+  Result := Self.F_descricao;
+end;
+
+{$endregion}
+
+              {$region'SET'}
+
+procedure TCategoria.setCodigo(const Value: Integer);
+begin
+  Self.F_categoria_id := Value;
+end;
+
+procedure TCategoria.setDescricao(const Value: String);
+begin
+   Self.F_descricao := Value;
+end;
+
+{$endregion}
+end.
